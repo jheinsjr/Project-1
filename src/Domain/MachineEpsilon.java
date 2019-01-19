@@ -1,19 +1,13 @@
-/*
- * 
- */
-
 package Domain;
 
 /**
  *
  * @author Joe Heins
  */
-public  class MachineEpsilon {
+public class MachineEpsilon {
 
     private double eps;
-    
-    
-    
+     
     public  MachineEpsilon() {
         eps = 1.0;
         double x;
@@ -25,6 +19,5 @@ public  class MachineEpsilon {
            System.out.println(eps);
         }   
         while ((1.0 + eps / 2) > 1.0);   
-
     }
 }
