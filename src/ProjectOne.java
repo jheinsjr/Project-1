@@ -6,7 +6,6 @@
 import Domain.*;
 import java.io.FileNotFoundException;
 
-
 public class ProjectOne {
 
     /**
@@ -23,7 +22,7 @@ public class ProjectOne {
         MatrixImpl class2 = new MatrixImpl();
         Matrix c2 = new Matrix(class2.getMatrix("class2.txt"));
         
-        //get the means for each class
+        //get the mean data for each class
         //class 1
         Matrix mean1 = e1.getMean();
         System.out.print("Mean for class 1 is: ");
@@ -35,6 +34,7 @@ public class ProjectOne {
         mean2.printMatrix();
         
         System.out.println();
+        
         //get the covariance matrices
         //class1
         Matrix covariance1 = e1.getCovariance();
@@ -218,15 +218,11 @@ public class ProjectOne {
          }
         }
         double total = 0;
-        
         for (int k = 0; k < maxValues.length; k++){
             total += maxValues[k];
         }
-        
-        return Math.abs(total);
-            
+        return Math.abs(total);   
         }
-
     }
 */
     }}
