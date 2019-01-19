@@ -1,7 +1,5 @@
 package Domain;
-
 import java.util.ArrayList;
-
 /**
  *
  * @author Joe Heins
@@ -11,9 +9,8 @@ public class Matrix extends Vector {
     private double[][] matrix;
     private int rows;
     private int columns;
-
+    
     public Matrix() {
-
     }
 
     public Matrix(double[][] a) {
@@ -30,7 +27,7 @@ public class Matrix extends Vector {
         return this.matrix;
     }
 
-    //add two matrices together
+    //add two matrices together (this + b = c)
     public Matrix addMatrices(double[][] b) {
         int mA = this.rows;
         int nA = this.columns;
@@ -46,9 +43,7 @@ public class Matrix extends Vector {
                     c[i][j] = this.matrix[i][j] + b[i][j];
                 }
             }
-
             Matrix C = new Matrix(c);
-
             return C;
         } else {
             System.out.println("Error: Incompatable Matrices");
@@ -71,9 +66,7 @@ public class Matrix extends Vector {
                     c[i][j] = this.matrix[i][j] - b[i][j];
                 }
             }
-
             Matrix C = new Matrix(c);
-
             return C;
         } else {
             System.out.println("Error: Incorret matrix size.");
@@ -90,9 +83,7 @@ public class Matrix extends Vector {
         int nB = B[0].length;
 
         if (nA == mB) {
-
             double c[][] = new double[mA][nB];
-
             for (int i = 0; i < mA; i++) {
                 for (int j = 0; j < nB; j++) {
                     for (int k = 0; k < nA; k++) {
@@ -100,15 +91,12 @@ public class Matrix extends Vector {
                     }
                 }
             }
-
             Matrix C = new Matrix(c);
-
             return C;
         } else {
             System.out.print("Incorrect Matrix size.");
             return null;
         }
-
     }
 
     //simple copy method returns a copy of a matrix
@@ -116,17 +104,13 @@ public class Matrix extends Vector {
 
         int m = this.matrix.length;
         int n = this.matrix[0].length;
-
         double[][] b = new double[m][n];
-
         for (int i = 0; i < m; i++) {
             for (int j = 0; j < n; j++) {
                 b[i][j] = this.matrix[i][j];
             }
         }
-
         Matrix B = new Matrix(b);
-
         return B;
     }
 
@@ -140,7 +124,6 @@ public class Matrix extends Vector {
             }
         }
         System.out.println();
-
     }
 
     // subtracts a scalar value from a matrix
@@ -153,7 +136,6 @@ public class Matrix extends Vector {
                 c[i][j] = this.matrix[i][j] - s;
             }
         }
-
         Matrix C = new Matrix(c);
         return C;
     }
@@ -163,21 +145,16 @@ public class Matrix extends Vector {
 
         int m = this.matrix.length;
         int n = this.matrix[0].length;
-
         double[][] m1 = new double[n][1];
-
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < m; j++) {
                 m1[i][0] += this.matrix[j][i];
             }
         }
-
         for (int i = 0; i < n; i++) {
             m1[i][0] = m1[i][0] / m;
         }
-
         Matrix mean = new Matrix(m1);
-
         return mean;
     }
 
@@ -186,16 +163,13 @@ public class Matrix extends Vector {
 
         int m = this.matrix.length;
         int n = this.matrix[0].length;
-
         double[][] t = new double[n][m];
         Matrix transposition = new Matrix(t);
-
         for (int i = 0; i < m; i++) {
             for (int j = 0; j < n; j++) {
                 transposition.matrix[j][i] = this.matrix[i][j];
             }
         }
-
         return transposition;
     }
 
@@ -205,18 +179,14 @@ public class Matrix extends Vector {
         int nA = this.matrix[0].length;
         int mB = b.length;
         int nB = b[0].length;
-
         if (mA == mB && nA == nB) {
-
             double[][] c = new double[mA][nA];
             for (int i = 0; i < mA; i++) {
                 for (int j = 0; j < nA; j++) {
                     c[i][j] = this.matrix[i][j] - b[i][j];
                 }
             }
-
             Matrix C = new Matrix(c);
-
             return C;
         } else {
             System.out.println("Error: Incorrect Matrix size.");
@@ -228,18 +198,15 @@ public class Matrix extends Vector {
     public Matrix getCovariance() {
         int m = this.matrix.length;
         int n = this.matrix[0].length;
-
         //Get mean matrix
         Matrix mean = this.getMean();
-
         //Get difference between mean and matrix
         Matrix diffMatrix = new Matrix();
         diffMatrix.setMatrix(new double[m][n]);
-
+        //Get transposition of mean matrix
         Matrix meanT = mean.getTransposition();
         Matrix sum = new Matrix(new double[n][n]);
         double s = 1 / (double) m;
-
         for (int i = 0; i < m; i++) {
             Vector v = new Vector(this.matrix[i]);
             diffMatrix.matrix[i] = v.difference(meanT.matrix[0]);
@@ -255,19 +222,15 @@ public class Matrix extends Vector {
             }
             sum = sum.addMatrices(product.getMatrix());
         }
-
         Matrix cMatrix;
         cMatrix = new Matrix(sum.scalarMultiple(s));
-
         return cMatrix;
-
     }
 
     //mutliply a matrix by a scalar
     public double[][] scalarMultiple(double s) {
         int m = this.rows;
         int n = this.columns;
-
         double[][] b = new double[m][n];
         for (int i = 0; i < m; i++) {
             for (int j = 0; j < n; j++) {
@@ -276,7 +239,7 @@ public class Matrix extends Vector {
         }
         return b;
     }
-
+    
     public double[] gaussianE(double[] b) {
         int E = 1;
         double[][] a = this.matrix;
